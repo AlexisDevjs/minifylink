@@ -1,6 +1,8 @@
 import { Theme } from '@/types/types'
 
-export function getThemeFromStorage(): Theme {
+export function getThemeFromStorage() {
+  if (typeof window === 'undefined') return 'light'
+
   const savedTheme = localStorage.getItem('theme') as Theme | null
 
   if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme
