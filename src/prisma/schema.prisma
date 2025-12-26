@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Link {
+  id        Int             @id @default(autoincrement())
+  slug      String          @unique
+  targetUrl String
+  createdAt DateTime        @default(now())
+  analytics Link_Analytic[]
+}
+
+model Link_Analytic {
+  id        Int      @id @default(autoincrement())
+  ip        String
+  country   String
+  userAgent String
+  createdAt DateTime @default(now())
+
+  linkId Int
+  link   Link @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@index([linkId])
+}

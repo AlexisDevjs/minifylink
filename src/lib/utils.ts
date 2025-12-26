@@ -1,12 +1,11 @@
-import { Theme } from '@/types/types'
+export function validateUrl(value: string) {
+  const trimmedValue = value.trim()
+  if (trimmedValue.length === 0) return false
 
-export function getThemeFromStorage() {
-  if (typeof window === 'undefined') return 'light'
-
-  const savedTheme = localStorage.getItem('theme') as Theme | null
-
-  if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme
-
-  const match = window.matchMedia('(prefers-color-scheme: dark)').matches
-  return match ? 'dark' : 'light'
+  try {
+    const url = new URL(value)
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
 }

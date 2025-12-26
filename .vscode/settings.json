@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["geist"]
+  "cSpell.words": [
+    "autoincrement",
+    "datasource",
+    "geist",
+    "heroui",
+    "postgresql"
+  ]
 }
